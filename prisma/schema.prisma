@@ -16,11 +16,14 @@ model User{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  email String
+  email String @unique
   hash String
 
-  firstName String
-  lastName String
+  name String
+
+  feedbacks Feedback[]
+
+  @@map("users")
 
 }
 
@@ -29,11 +32,18 @@ model Hotel{
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name String
+  name String @unique
   pricePerNight String
   extras String?
   country String
   city String
+  
+  
+
+  feedbacks Feedback[]
+  
+
+  @@map("hotels")
 
 
 
@@ -46,5 +56,13 @@ model Feedback{
 
   rating Int
   message String?
+
+  userId Int
+  hotelId Int
+  
+  user User @relation(fields: [userId], references: [id])
+  hotel Hotel @relation(fields: [hotelId], references: [id])
+
+  @@map("feedbacks")
 
 }

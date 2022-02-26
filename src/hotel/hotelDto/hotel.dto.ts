@@ -16,4 +16,6 @@ export class HotelDto{
     
     @IsNotEmpty()
     city: string;
+    @IsNotEmpty()
+    roomPhoto:string;
 }

@@ -10,7 +10,7 @@ export class FeedbackService {
 
 
     async createFeedback(dto:FeedbackDto){
-        console.log
+        console.log(dto);
         const feedback = await this.prismaService.feedback.create({
             data:{
                 message:dto.message,

@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { HotelModule } from './hotel/hotel.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { NotificationModule } from './notification/notification.module';
 
 
 
@@ -18,7 +19,7 @@ import { PrismaModule } from './prisma/prisma.module';
     ConfigModule.forRoot({
       envFilePath:'.env',
       isGlobal:true,
-    })
+    }), NotificationModule
     ],
   controllers: [],
   providers: [],

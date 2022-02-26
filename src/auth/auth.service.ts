@@ -5,6 +5,7 @@ import { AuthDto } from './authDto';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { LoginDto } from './authDto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,8 @@ export class AuthService {
 
     async signup(dto:AuthDto){
         //hash the password
-        const hash = await argon.hash(dto.password)
+        const hash = await argon.hash(dto.password);
+
 
         //save the user in the db
         try{
@@ -22,7 +24,10 @@ export class AuthService {
                 data:{
                     email: dto.email,
                     name:dto.name,
+                    country:dto.country,
+                    image:dto.image,
                     hash,
+                    
                 },
                 
             })
@@ -45,15 +50,17 @@ export class AuthService {
         }
         
     }
-    async signin(dto:AuthDto){
+    async signin(dto:LoginDto){
         //Find the user by email
         //if user dont exists throw error
+        
         const user = await this.prismaService.user.findFirst({
             where:{email:dto.email}
         })
         if (!user) throw new ForbiddenException('credentials incorrect')
         //compare passwords
-        const pwMatches = await argon.verify(user.hash,dto.password)
+        console.log(user.hash, dto.password)
+        const pwMatches = await argon.verify(user.hash, dto.password)
         //if passwords incorrect throw error
         if(!pwMatches) throw new ForbiddenException('credentials incorrect');
     
@@ -63,6 +70,7 @@ export class AuthService {
     }
 
     async signToken(userId:number, email:string):Promise<{ access_token: string }>{
+
         const payload = {
             sub:userId,
             email

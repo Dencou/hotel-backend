@@ -15,13 +15,13 @@ export class HotelService {
     }
 
     async createService(dto:HotelDto){
-      
         try{
             const hotel = await this.prismaService.hotel.create({
                 data:{
                     name:dto.name,
                     pricePerNight:dto.pricePerNight,
                     extras:dto.extras,
+                    roomPhoto:dto.roomPhoto,
                     country:dto.country,
                     city:dto.city,
                 }

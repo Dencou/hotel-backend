@@ -17,6 +17,9 @@ model User{
   updatedAt DateTime @updatedAt
 
   email String @unique
+  image String
+  country String
+
   hash String
 
   name String
@@ -37,6 +40,7 @@ model Hotel{
   extras String?
   country String
   city String
+  roomPhoto String
   
   
 
@@ -56,6 +60,7 @@ model Feedback{
 
   rating Int
   message String?
+  
 
   userId Int
   hotelId Int
@@ -64,5 +69,17 @@ model Feedback{
   hotel Hotel @relation(fields: [hotelId], references: [id])
 
   @@map("feedbacks")
+
+}
+
+model Notification {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title String
+  subtitle String
+  photo String
+  time String
 
 }

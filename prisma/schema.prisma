@@ -25,6 +25,7 @@ model User{
   name String
 
   feedbacks Feedback[]
+  savedHotels SaveHotel[]
 
   @@map("users")
 
@@ -68,6 +69,8 @@ model Feedback{
   user User @relation(fields: [userId], references: [id])
   hotel Hotel @relation(fields: [hotelId], references: [id])
 
+  
+
   @@map("feedbacks")
 
 }
@@ -81,5 +84,23 @@ model Notification {
   subtitle String
   photo String
   time String
+
+  @@map("notifications")
+}
+
+model SaveHotel{
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String @unique
+  pricePerNight String
+  extras String?
+  country String
+  city String
+  roomPhoto String
+  userId Int
+
+  user User @relation(fields: [userId], references: [id])
 
 }

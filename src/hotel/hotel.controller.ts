@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { HotelService } from './hotel.service';
 import { HotelDto } from './hotelDto/hotel.dto';
 
+
 @Controller('hotel')
 export class HotelController {
 
@@ -12,7 +13,7 @@ export class HotelController {
         return this.hotelService.getHotels();
     }
 
-    @Post("hotels")
+    @Post()
     createHotels(@Body() dto:HotelDto){
         return this.hotelService.createService(dto);
     }

@@ -6,6 +6,8 @@ import { HotelModule } from './hotel/hotel.module';
 import { FeedbackModule } from './feedback/feedback.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { NotificationModule } from './notification/notification.module';
+import { SavedHotelsController } from './saved-hotels/saved-hotels.controller';
+import { SavedHotelsService } from './saved-hotels/saved-hotels.service';
 
 
 
@@ -21,7 +23,7 @@ import { NotificationModule } from './notification/notification.module';
       isGlobal:true,
     }), NotificationModule
     ],
-  controllers: [],
-  providers: [],
+  controllers: [SavedHotelsController],
+  providers: [SavedHotelsService],
 })
 export class AppModule {}

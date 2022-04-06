@@ -9,6 +9,7 @@
     "prisma:dev:deploy": "prisma migrate deploy",
     "db:dev:rm": "docker compose rm docker-tutorial -s -f -v",
     "db:dev:up": "docker compose up -d",
+    "nest:db:prisma": "npm run start:dev && docker compose up && npx prisma studio",
     "db:dev:restart": "npm run db:dev:rm && npm run db:dev:up && npm run prisma:dev:deploy",
     "prebuild": "rimraf dist",
     "build": "nest build",

@@ -14,6 +14,18 @@ export class HotelService {
         return hotels;
     }
 
+    async searchHotels(country){
+        console.log(country);
+        const search = await this.prismaService.hotel.findMany({
+            where: {
+                country:{
+                    contains: country,
+                }
+            }
+        })
+        return search;
+    }
+
     async createService(dto:HotelDto){
         try{
             const hotel = await this.prismaService.hotel.create({

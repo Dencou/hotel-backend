@@ -1,7 +1,10 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime';
+import { join } from 'path';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { HotelDto } from './hotelDto/hotel.dto';
+import { PaymentData } from './hotelDto/paymentData.dto';
+import { ProcessPaymentModel } from './hotelDto/paymentProcess.dto';
 
 @Injectable()
 export class HotelService {
@@ -24,6 +27,19 @@ export class HotelService {
             }
         })
         return search;
+    }
+
+    async processPayment(dto:ProcessPaymentModel):Promise<PaymentData>{
+        const total = (dto.days * dto.price).toString();
+        const date = dto.date;
+        
+        const totals:PaymentData = {
+            total,
+            date,   
+        };
+        console.log(totals);
+        return totals;
+
     }
 
     async createService(dto:HotelDto){
